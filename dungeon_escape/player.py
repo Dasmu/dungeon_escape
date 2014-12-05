@@ -7,16 +7,19 @@ Created on Thu Dec  4 21:23:57 2014
 #==============================================================================
 # 
 #==============================================================================
+from item import Item
+
 class Player(object):
     inventory = []
     
     def __init__(self, name):
         self.name = name
+        self.inventory.append(Item('water bottle'))
         
     def take_item(self, item):
-        self.inventory.put(item)
+        self.inventory.append(item)
         
     def show_inventory(self):
         for item in self.inventory:
-            print item
+            return item.show_details()
     

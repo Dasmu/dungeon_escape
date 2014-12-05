@@ -10,5 +10,5 @@ class GameObject(object):
         def __init__(self, description):
             self.description = description
             
-        def details(self):
+        def show_details(self):
             return self.description

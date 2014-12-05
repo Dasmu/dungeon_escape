@@ -5,21 +5,23 @@ Created on Thu Dec  4 21:23:57 2014
 @author: fabio
 """
 #==============================================================================
-# 
+# Defines a Player
+#   player name: defined on game start
+#   player bag: container to store found items
 #==============================================================================
 from item import Item
 
 class Player(object):
-    inventory = []
+    bag = []
     
     def __init__(self, name):
         self.name = name
-        self.inventory.append(Item('water bottle'))
+        self.bag.append(Item('water bottle'))
         
     def take_item(self, item):
-        self.inventory.append(item)
+        self.bag.append(item)
         
     def show_inventory(self):
-        for item in self.inventory:
+        for item in self.bag:
             return item.show_details()
     

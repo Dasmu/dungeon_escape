@@ -4,9 +4,11 @@
 #==============================================================================
 
 from player import Player
+from gameobject import GameObject
 
 class BaseRoom(object):
-    player = None  
+    player = None
+    inventory = []
     
     def __init__(self, name, description):
         # the name of the room
@@ -26,17 +28,17 @@ class BaseRoom(object):
                 'north-west': None,
                 'up': None,
                 'down': None}
-        
-    # **************** BUILD ACTION FOR ROOM ****************
+#==============================================================================
+# BUILD ACTION FOR ROOM
+#==============================================================================
     def enter_unvisited(self):
         # do stuff in the room
         # get at least user input on where to go next
-        # before returning the direction
-        # set self.visited = True
         return 'north'
     
     def enter_visited(self):
         # maybe do other stuff now
+        # or just return self.enter_unvisited() 
         return 'north'
     
 #==============================================================================
@@ -45,24 +47,33 @@ class BaseRoom(object):
 #==============================================================================
     
     # updates the room layout
-    # @param: Dictionary entry to match directions to rooms: 'direction': room_object
+    # @param: Dictionary entry to match: 'direction': room_object
     def add_paths(self, path):
         self.roomLayout.update(path)
+    
+    # adds a new GameObject to the room's inventory
+    def add_objects(self, new_object):
+        self.inventory.append(new_object)
     
 #==============================================================================
 #     GAME ENGINE FUNCTIONS
 #     these functions get called by the game engine DO NOT CHANGE!!!
 #==============================================================================
     
-    # returns the direction to go to
+    # puts the player into the room,
+    # calls the self defined room functions
+    # returns the direction the player wants to take to the game engine
     def enter(self, player):
         self.player = player
         if self.visited == False:
             # enter the room for the first time
-            return self.enter_unvisited()
+            next_room = self.enter_unvisited()
+            self.visited = True
+            return next_room
         else:
             # enter the room again
-            return self.enter_visited()
+            next_room = self.enter_visited()
+            return next_room
         
     # according to direction returns the next room
     def go(self, direction):

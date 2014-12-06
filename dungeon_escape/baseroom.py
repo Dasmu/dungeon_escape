@@ -13,8 +13,10 @@ class BaseRoom(object):
     def __init__(self, name, description):
         # the name of the room
         self.name = name
-        # the description of what is in the room
+        # the description of the room (including exits and objects)
         self.description = description
+        self.directions = description
+        self.objects = description
         self.visited = False
         # the basic room Layout 10-directional
         # every room is an octagon and can have a room above or below
@@ -50,6 +52,14 @@ class BaseRoom(object):
     # @param: Dictionary entry to match: 'direction': room_object
     def add_paths(self, path):
         self.roomLayout.update(path)
+        
+    # optional: describe where to find exits separately
+    def describe_layout(self, description):
+        self.directions = description
+    
+    # optional: describe what objects to find in the room   
+    def describe_objects(self, description):
+        self.objects = description
     
     # adds a new GameObject to the room's inventory
     def add_objects(self, new_object):

@@ -1,4 +1,3 @@
-from map import Map
 from player import Player
 from baseroom import BaseRoom
 
@@ -16,5 +15,5 @@ class Engine(object):
 		while True:
 			print "-" * 10
 			direction_name = current_room.enter(self.player)
-			self.room_history.put(current_room)
+			self.room_history.append(current_room)
 			current_room = current_room.go(direction_name)

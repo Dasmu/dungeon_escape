@@ -29,7 +29,7 @@ class BaseRoom(object):
                 'up': None,
                 'down': None}
 #==============================================================================
-# BUILD ACTION FOR ROOM
+#   BUILD ACTION FOR ROOM
 #==============================================================================
     def enter_unvisited(self):
         # do stuff in the room
